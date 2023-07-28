@@ -5,6 +5,7 @@
       "bundler": "metro"
     },
     "name": "shurry_shop",
-    "slug": "shurry_shop"
+    "slug": "shurry_shop",
+    "orientation": "portrait"
   }
 }
