@@ -80,7 +80,7 @@ const AddPrice = ({ modalVisible, setModalVisible, elemPrice, list }) => {
                   priceList?.map((elem, index) => {
                     return (
                       <Text key={index} style={styles2.textHistoryStyle2}>
-                        {elem.price} € - {elem.date}
+                        <Text style={{fontWeight: 600}}>{elem.price} €</Text> - {elem.date}
                       </Text>
                     );
                   })
@@ -103,13 +103,14 @@ const styles2 = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22,
+    marginTop: 2,
+    backgroundColor: "rgba(0,0,0,0.8)",
   },
   modalView: {
     margin: 20,
     backgroundColor: "orange",
     borderRadius: 20,
-    padding: 35,
+    padding: 15,
     alignItems: "center",
     shadowColor: "black",
     shadowOffset: {
@@ -120,7 +121,7 @@ const styles2 = StyleSheet.create({
     shadowRadius: 4,
     elevation: 40,
     height: "auto",
-    width: "90%",
+    width: "70%",
   },
   button: {
     borderRadius: 20,

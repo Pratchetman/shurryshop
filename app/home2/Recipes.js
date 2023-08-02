@@ -10,7 +10,7 @@ const Recipes = ({ userId }) => {
   const [aux, setAux] = useState(false);
   const [oneRecipe, setOneRecipe] = useState({});
   const { recipes, getRecipes } = useFetch();
-
+  console.log("recetas", recipes)
   useEffect(() => {
     getRecipes(userId);
   }, [aux]);

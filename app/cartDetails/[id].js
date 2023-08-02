@@ -52,6 +52,7 @@ const CartDetails = () => {
           setAux={setAux}
           setModalVisible2={setModalVisible}
           modalVisible2={modalVisible}
+          userId={params.id.split("+")[0]}
         />
       )}
           {modalShareVisible && (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   Modal,
@@ -8,12 +8,31 @@ import {
   View,
   TextInput,
 } from "react-native";
+import ModalDropdown from "react-native-modal-dropdown";
 import styles from "./cartDetails.style";
 import { AllArts } from "../../components/allArts/AllArts";
+import useFetch from "../../hook/fetchData";
 
-const AddArts = ({ modalVisible2, setModalVisible2, list, aux, setAux }) => {
+const AddArts = ({
+  userId,
+  modalVisible2,
+  setModalVisible2,
+  list,
+  aux,
+  setAux,
+}) => {
   const [search, setSearch] = useState("");
+  const { getRecipes, recipes } = useFetch();
+  useEffect(() => {
+    getRecipes(userId.split("_")[0]);
+  }, []);
+  const [recipe, setRecipe] = useState([]);
 
+  const handleSelectRecipe = (index) => {
+    setRecipe(recipes[index]);
+    setAux(!aux)
+  };
+  console.log("recipes para el menu", recipes);
   return (
     <View style={styles2.centeredView}>
       <Modal
@@ -28,20 +47,71 @@ const AddArts = ({ modalVisible2, setModalVisible2, list, aux, setAux }) => {
         <View style={styles2.centeredView}>
           <View style={styles2.modalView}>
             <Text style={styles2.modalText}>Buscador de artículos</Text>
-            <TextInput
-              style={styles.searchInput}
-              placeholder="Introduce artículo"
-              value={search}
-              onChangeText={(text) => {
-                setSearch(text);
+
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                width: "90%",
+                justifyContent: "center",
+                gap: 10,
+                alignItems: "center",
+                // overflow: "hidden"
               }}
-            />
-            <Pressable
-              style={[styles2.button, styles2.buttonClose]}
-              onPress={() => setModalVisible2(!modalVisible2)}
             >
-              <Text style={styles2.textStyle}>Terminar</Text>
-            </Pressable>
+              <TextInput
+                style={styles.searchInput}
+                placeholder="Introduce artículo"
+                value={search}
+                onChangeText={(text) => {
+                  setSearch(text);
+                }}
+              />
+              <ModalDropdown
+                defaultValue="Recetas"
+                style={styles.searchInputModal}
+                options={recipes.map((elem) => elem.name)}
+                onSelect={handleSelectRecipe}
+                showsVerticalScrollIndicator={true}
+                dropdownStyle={{
+                  elevation: 2,
+                  borderWidth: 2,
+                  borderRadius: 16,
+                  overflow: "hidden",
+                  marginHorizontal: -30,
+                  marginVertical: 14,
+                  height: "auto",
+                  maxHeight: 300,
+                  
+                }}
+                dropdownTextStyle={{
+                  textAlign: "right",
+                  color: "black",
+                  fontWeight: "bold",
+                }}
+                dropdownTextHighlightStyle={{ color: "green" }}
+              />
+            </View>
+            {recipe.name && (
+              <Text
+                style={{
+                  fontSize: 17,
+                  textAlign: "center",
+                  marginVertical: 10,
+                }}
+              >
+                Ingredientes necesarios para:{" "}
+                <Text style={{ fontWeight: "bold" }}>{recipe.name}</Text>
+              </Text>
+            )}
+            <AllArts
+              aux={aux}
+              setAux={setAux}
+              list={list}
+              search={search}
+              setSearch={setSearch}
+              recipe={recipe}
+            />
             <View
               style={{
                 backgroundColor: "green",
@@ -52,13 +122,12 @@ const AddArts = ({ modalVisible2, setModalVisible2, list, aux, setAux }) => {
                 opacity: 0.7,
               }}
             />
-            <AllArts
-              aux={aux}
-              setAux={setAux}
-              list={list}
-              search={search}
-              setSearch={setSearch}
-            />
+            <Pressable
+              style={[styles2.button, styles2.buttonClose]}
+              onPress={() => setModalVisible2(!modalVisible2)}
+            >
+              <Text style={styles2.textStyle}>Terminar</Text>
+            </Pressable>
           </View>
         </View>
       </Modal>
@@ -72,7 +141,7 @@ const styles2 = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 2,
-    backgroundColor: "rgba(0,0,0,0.8)"
+    backgroundColor: "rgba(0,0,0,0.8)",
   },
   modalView: {
     margin: 20,
@@ -111,8 +180,10 @@ const styles2 = StyleSheet.create({
     textAlign: "center",
   },
   modalText: {
-    marginBottom: 15,
+    marginBottom: 5,
     textAlign: "center",
+    fontSize: 24,
+    fontWeight: "bold",
   },
 });
 

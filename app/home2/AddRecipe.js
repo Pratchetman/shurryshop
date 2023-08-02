@@ -14,6 +14,8 @@ import styles from "../cartDetails/cartDetails.style";
 import useFetch from "../../hook/fetchData";
 import { COLORS, icons, images, SIZES } from "../../constants";
 import AddArts from "../cartDetails/AddArts";
+import AddArtsRecipe from "./AddArtsRecipes";
+import { ScrollView } from "react-native";
 const initialRecipe = {
   name: "",
   elab: "",
@@ -33,7 +35,7 @@ const AddRecipe = ({ modalVisible, setModalVisible, userId, setAux, aux }) => {
   };
 
   const newRecipe = () => {
-    addRecipe(userId, recipe);
+    addRecipe(userId, recipe, recipeFood);
     setAux(!aux);
     setModalVisible(!modalVisible);
   };
@@ -85,13 +87,39 @@ const AddRecipe = ({ modalVisible, setModalVisible, userId, setAux, aux }) => {
             />
             <View
               style={{
-                
                 width: "90%",
               }}
             >
               <Text style={styles.headerSubTitle}>Ingredientes</Text>
-              <TouchableOpacity style={{marginLeft: 0}}>
-              
+              <ScrollView horizontal={true} >
+                {recipeFood.map((elem, index) => {
+                  return (
+                    <TouchableOpacity
+                      key={index}
+                      style={{ marginLeft: 0 }}
+                      onPress={() => setSecondModal(!secondModal)}
+                    >
+                      <View
+                        style={{
+                          backgroundColor: COLORS.lightWhite,
+                          width: 50,
+                          height: 50,
+                          borderRadius: 10,
+                          justifyContent: "center",
+                          alignItems: "center",
+                          margin: 5,
+                          marginTop: 10,
+                        }}
+                      >
+                        <Text style={{ fontSize: 10, textAlign: "center" }}>{elem.name}</Text>
+                      </View>
+                    </TouchableOpacity>
+                  );
+                })}
+                <TouchableOpacity
+                  style={{ marginLeft: 0 }}
+                  onPress={() => setSecondModal(!secondModal)}
+                >
                   <View
                     style={{
                       backgroundColor: COLORS.lightWhite,
@@ -101,13 +129,13 @@ const AddRecipe = ({ modalVisible, setModalVisible, userId, setAux, aux }) => {
                       justifyContent: "center",
                       alignItems: "center",
                       margin: 5,
-                      marginTop: 10
+                      marginTop: 10,
                     }}
                   >
                     <Text style={{ fontSize: 30 }}>+</Text>
                   </View>
-               
-              </TouchableOpacity>
+                </TouchableOpacity>
+              </ScrollView>
             </View>
             <View
               style={{
@@ -133,7 +161,15 @@ const AddRecipe = ({ modalVisible, setModalVisible, userId, setAux, aux }) => {
           </View>
         </View>
       </Modal>
-      {secondModal && <AddArts list={recipeFood} />}
+      {secondModal && (
+        <AddArtsRecipe
+          list={recipeFood}
+          setList={setRecipeFood}
+          modalVisible2={secondModal}
+          setModalVisible2={setSecondModal}
+          userId={userId}
+        />
+      )}
     </View>
   );
 };

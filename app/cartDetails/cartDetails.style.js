@@ -32,12 +32,25 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     fontFamily: FONT.regular,
-    width: "90%",
+    width: "50%",
     height: 40,
     paddingHorizontal: SIZES.medium,
     backgroundColor: COLORS.lightWhite,
     borderRadius: 16,
-    margin: 10,
+    marginVertical: 10,
+  },
+  searchInputModal: {
+    fontFamily: FONT.regular,
+    width: "40%",
+    height: 40,
+    backgroundColor: COLORS.lightWhite,
+    borderRadius: 16,
+    marginVertical: 10,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "relative"
   },
   searchInputRecipe: {
     fontFamily: FONT.regular,

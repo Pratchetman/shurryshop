@@ -11,12 +11,7 @@ import useFetch from "../../hook/fetchData";
 import AddPrice from "./AddPrice";
 
 const OneCart = ({ list, aux, setAux, modalVisible2, setModalVisible2 }) => {
-  const {
-    fetchAllArticles,
-    cartDetail,
-    articleIn,
-    oneCart,
-  } = useFetch();
+  const { fetchAllArticles, cartDetail, articleIn, oneCart } = useFetch();
 
   const [elemPrice, setElemPrice] = useState();
   const [modalVisible, setModalVisible] = useState(false);
@@ -119,9 +114,18 @@ const OneCart = ({ list, aux, setAux, modalVisible2, setModalVisible2 }) => {
         }}
       />
       {oneCart && (
-        <Text style={styles.headerTitle}>
-          {oneCart[0] ? "Compra finalizada" : "Ya en carrito"}
-        </Text>
+        <View style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
+          <Text style={styles.headerTitle}>
+            {oneCart[0] ? "Compra finalizada" : "Ya en carrito"}
+          </Text>
+          <Text style={styles.headerTitle}>
+            {
+              Object.values(oneCart[2])?.filter((elem) => elem.in === true)
+                .length
+            }{" "}
+            de {oneCart && Object.values(oneCart[2]).length - 1}
+          </Text>
+        </View>
       )}
       <View
         style={{

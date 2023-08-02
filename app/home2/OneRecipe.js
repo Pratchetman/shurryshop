@@ -1,22 +1,18 @@
 import React, { useState } from "react";
 import {
-  Alert,
   Modal,
   StyleSheet,
   Text,
   Pressable,
   View,
-  TextInput,
   Image,
+  ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import styles from "../cartDetails/cartDetails.style";
-import { images } from "../../constants";
-import useFetch from "../../hook/fetchData";
+import { images, COLORS } from "../../constants";
 
 const OneRecipe = ({ modalVisible2, setModalVisible2, recipe }) => {
-  const { oneRecipe } = useFetch();
-  console.log(recipe);
-
   return (
     <View style={styles2.centeredView}>
       <Modal
@@ -38,7 +34,7 @@ const OneRecipe = ({ modalVisible2, setModalVisible2, recipe }) => {
                 width: "85%",
                 alignItems: "center",
                 marginBottom: 10,
-                gap: 10
+                gap: 10,
               }}
             >
               <Text style={styles.headerTitle}>{recipe.name}</Text>
@@ -49,12 +45,46 @@ const OneRecipe = ({ modalVisible2, setModalVisible2, recipe }) => {
             </View>
 
             <Text style={styles.searchInputRecipe}>{recipe.elab}</Text>
-
+            <View
+              style={{
+                width: "90%",
+              }}
+            >
+              <Text style={styles.headerSubTitle}>Ingredientes</Text>
+              <ScrollView horizontal={true}>
+                {recipe.food ? (
+                  recipe.food.map((elem, index) => {
+                    return (
+                      <TouchableOpacity key={index} style={{ marginLeft: 0 }}>
+                        <View
+                          style={{
+                            backgroundColor: COLORS.lightWhite,
+                            width: 50,
+                            height: 50,
+                            borderRadius: 10,
+                            justifyContent: "center",
+                            alignItems: "center",
+                            margin: 5,
+                            marginTop: 10,
+                          }}
+                        >
+                          <Text style={{ fontSize: 10, textAlign: "center" }}>
+                            {elem.name}
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    );
+                  })
+                ) : (
+                  <Text>No has introducido ingredientes para esta receta</Text>
+                )}
+              </ScrollView>
+            </View>
             <Pressable
               style={[styles2.button, styles2.buttonClose]}
               onPress={() => setModalVisible2(!modalVisible2)}
             >
-              <Text style={styles2.textStyle}>Terminar</Text>
+              <Text style={styles2.textStyle}>Volver a recetas</Text>
             </Pressable>
             <View
               style={{

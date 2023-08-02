@@ -101,6 +101,27 @@ const useFetch = () => {
         console.error(error);
       });
   };
+
+  const fetchAllArticlesWithRandom = (recipe) => {
+    const dbRef = ref(getDatabase());
+    console.log("estoy en el fetch para el nuevo All Articles");
+    get(child(dbRef, `food/`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          let auxArticles = Object.values(snapshot.val()).concat(
+            recipe.food.filter((elem) => elem.type == "random")
+          );
+
+          setAllArticles(auxArticles);
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   const addArticlesToList = (list, food) => {
     let dbs = getDatabase();
 
@@ -271,7 +292,11 @@ const useFetch = () => {
     get(child(dbRef, `users/${userId}/recipes`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          setRecipes(Object.values(snapshot.val()));
+          setRecipes(
+            Object.values(snapshot.val()).sort(
+              (a, b) => b.id.split("_")[1] - a.id.split("_")[1]
+            )
+          );
         } else {
           console.log("No data available");
         }
@@ -281,9 +306,12 @@ const useFetch = () => {
       });
   };
 
-  const addRecipe = (userId, recipe) => {
+  const addRecipe = (userId, recipe, foodList) => {
     let dbs = getDatabase();
-    set(ref(dbs, `users/${userId}/recipes/${recipe.id}`), recipe);
+    set(ref(dbs, `users/${userId}/recipes/${recipe.id}`), {
+      ...recipe,
+      food: foodList,
+    });
   };
 
   return {
@@ -310,6 +338,7 @@ const useFetch = () => {
     recipes,
     getRecipes,
     addRecipe,
+    fetchAllArticlesWithRandom,
   };
 };
 

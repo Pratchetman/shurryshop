@@ -56,7 +56,7 @@ const ShareCart = ({
         <View style={styles2.centeredView}>
           <View style={styles2.modalView}>
             <Text style={styles2.modalText}>
-              ¿Con quién quieres compartir {list[3]}?
+              ¿Con quién quieres compartir "{list[3]}"?
             </Text>
             <TextInput
               style={styles.searchInput}
@@ -115,7 +115,7 @@ const ShareCart = ({
                 })}
               </View>
             )}
-            <Pressable
+            {shareList.length > 0 && <Pressable
               style={[styles2.button, styles2.buttonClose]}
               onPress={() => {
                 toShareCart(list, shareList, email);
@@ -123,7 +123,7 @@ const ShareCart = ({
               }}
             >
               <Text style={styles2.textStyle}>Compartir</Text>
-            </Pressable>
+            </Pressable>}
           </View>
         </View>
       </Modal>
