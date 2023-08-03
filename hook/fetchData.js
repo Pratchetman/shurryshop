@@ -104,7 +104,7 @@ const useFetch = () => {
 
   const fetchAllArticlesWithRandom = (recipe) => {
     const dbRef = ref(getDatabase());
-    console.log("estoy en el fetch para el nuevo All Articles");
+
     get(child(dbRef, `food/`))
       .then((snapshot) => {
         if (snapshot.exists()) {
@@ -122,10 +122,14 @@ const useFetch = () => {
       });
   };
 
-  const addArticlesToList = (list, food) => {
+  const addArticlesToList = (list, food, recipe) => {
     let dbs = getDatabase();
-
+    console.log("receta en el fetch", recipe.name);
     set(ref(dbs, `carts/${list[1]}/lista/${food.id}`), food);
+    if (recipe.name){
+      set(ref(dbs, `carts/${list[1]}/recipes/${recipe.name}`), recipe.name);
+    }
+    
   };
 
   const articleIn = (listId, article) => {
@@ -141,6 +145,7 @@ const useFetch = () => {
       id: cartId,
       lista: [""],
       name: name,
+      recipes: [""],
       shared: [user],
     };
     let dbs = getDatabase();
@@ -161,6 +166,7 @@ const useFetch = () => {
       .then((snapshot) => {
         if (snapshot.exists()) {
           let lista = Object.values(snapshot.val());
+          console.log("lista para ver precios", lista);
           const promises = lista.map((item) =>
             get(child(dbRef, `carts/${item.id}`)).then((snapshot) => {
               const artList = Object.values(snapshot.val().lista);
@@ -240,7 +246,7 @@ const useFetch = () => {
     }
   };
 
-  const toShareCart = (list, shareList, email) => {
+  const toShareCart = (list, shareList) => {
     const newCart = {
       finished: false,
       id: list[1],

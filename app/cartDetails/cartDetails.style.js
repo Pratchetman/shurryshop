@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     fontFamily: FONT.regular,
-    width: "50%",
+    width: "60%",
     height: 40,
     paddingHorizontal: SIZES.medium,
     backgroundColor: COLORS.lightWhite,
@@ -123,16 +123,35 @@ const styles = StyleSheet.create({
   applyBtn: {
     width: 150,
     backgroundColor: "white",
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    // marginLeft: SIZES.medium,
+    borderRadius: SIZES.medium,
+    marginTop: 10,
+    elevation: 2
+  },
+  applyBtnText: {
+    fontSize: SIZES.medium,
+    color: COLORS.secondary,
+    fontFamily: FONT.bold,
+  },
+  applyBtnRecipe: {
+    // width: 150,
+    paddingHorizontal: 6,
+    backgroundColor: "green",
     height: 40,
     justifyContent: "center",
     alignItems: "center",
     marginLeft: SIZES.medium,
     borderRadius: SIZES.medium,
     marginTop: 10,
+    borderWidth: 1,
+    borderColor: "white"
   },
-  applyBtnText: {
+  applyBtnTextRecipe: {
     fontSize: SIZES.medium,
-    color: COLORS.secondary,
+    color: COLORS.lightWhite,
     fontFamily: FONT.bold,
   },
   

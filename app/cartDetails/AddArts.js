@@ -7,6 +7,7 @@ import {
   Pressable,
   View,
   TextInput,
+  ScrollView,
 } from "react-native";
 import ModalDropdown from "react-native-modal-dropdown";
 import styles from "./cartDetails.style";
@@ -29,10 +30,16 @@ const AddArts = ({
   const [recipe, setRecipe] = useState([]);
 
   const handleSelectRecipe = (index) => {
-    setRecipe(recipes[index]);
-    setAux(!aux)
+    if (index != 0) {
+      console.log("seteo recipe a", recipes[index - 1]);
+      setRecipe(recipes[index - 1]);
+      setAux(!aux);
+    } else {
+      setRecipe({});
+      setAux(!aux);
+    }
   };
-  console.log("recipes para el menu", recipes);
+
   return (
     <View style={styles2.centeredView}>
       <Modal
@@ -70,7 +77,9 @@ const AddArts = ({
               <ModalDropdown
                 defaultValue="Recetas"
                 style={styles.searchInputModal}
-                options={recipes.map((elem) => elem.name)}
+                options={["-Sin receta-"].concat(
+                  recipes.map((elem) => elem.name)
+                )}
                 onSelect={handleSelectRecipe}
                 showsVerticalScrollIndicator={true}
                 dropdownStyle={{
@@ -82,7 +91,6 @@ const AddArts = ({
                   marginVertical: 14,
                   height: "auto",
                   maxHeight: 300,
-                  
                 }}
                 dropdownTextStyle={{
                   textAlign: "right",
@@ -92,7 +100,7 @@ const AddArts = ({
                 dropdownTextHighlightStyle={{ color: "green" }}
               />
             </View>
-            {recipe.name && (
+            {recipe?.name && (
               <Text
                 style={{
                   fontSize: 17,
@@ -104,14 +112,17 @@ const AddArts = ({
                 <Text style={{ fontWeight: "bold" }}>{recipe.name}</Text>
               </Text>
             )}
-            <AllArts
-              aux={aux}
-              setAux={setAux}
-              list={list}
-              search={search}
-              setSearch={setSearch}
-              recipe={recipe}
-            />
+            <ScrollView style={{ flex: 1 }}>
+              <AllArts
+                aux={aux}
+                setAux={setAux}
+                list={list}
+                search={search}
+                setSearch={setSearch}
+                recipe={recipe}
+              />
+            </ScrollView>
+
             <View
               style={{
                 backgroundColor: "green",
@@ -147,7 +158,8 @@ const styles2 = StyleSheet.create({
     margin: 20,
     backgroundColor: "orange",
     borderRadius: 20,
-    padding: 25,
+    padding: 20,
+    paddingBottom: 12,
     alignItems: "center",
     shadowColor: "black",
     shadowOffset: {
@@ -171,7 +183,7 @@ const styles2 = StyleSheet.create({
     backgroundColor: "#F194FF",
   },
   buttonClose: {
-    marginTop: 10,
+    marginTop: 0,
     backgroundColor: "green",
   },
   textStyle: {

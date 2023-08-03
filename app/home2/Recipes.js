@@ -4,13 +4,13 @@ import { COLORS, icons, images, SIZES } from "../../constants";
 import useFetch from "../../hook/fetchData";
 import AddRecipe from "./AddRecipe";
 import OneRecipe from "./OneRecipe";
-const Recipes = ({ userId }) => {
-  const [modalVisible, setModalVisible] = useState(false);
+const Recipes = ({ userId, modalVisibleRecipes, setModalVisibleRecipes }) => {
+  // const [modalVisible, setModalVisible] = useState(false);
   const [modalVisible2, setModalVisible2] = useState(false);
   const [aux, setAux] = useState(false);
   const [oneRecipe, setOneRecipe] = useState({});
   const { recipes, getRecipes } = useFetch();
-  console.log("recetas", recipes)
+  console.log("recetas", recipes);
   useEffect(() => {
     getRecipes(userId);
   }, [aux]);
@@ -21,34 +21,7 @@ const Recipes = ({ userId }) => {
   };
 
   return (
-    <View style={{ flex: 1, paddingTop: 25 }}>
-      <TouchableOpacity
-        style={{ margin: 5, flex: 0.15 }}
-        onPress={() => setModalVisible(!modalVisible)}
-      >
-        <View
-          style={{
-            flex: 0.2,
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <View
-            style={{
-              backgroundColor: COLORS.lightWhite,
-              width: 50,
-              height: 50,
-              borderRadius: 100 / 2,
-              justifyContent: "center",
-              alignItems: "center",
-              marginBottom: 25,
-            }}
-          >
-            <Text style={{ fontSize: 30 }}>+</Text>
-          </View>
-        </View>
-      </TouchableOpacity>
+    <View style={{ flex: 1, paddingTop: 5 }}>
       <View style={{ flex: 4 }}>
         <FlatList
           showsVerticalScrollIndicator={false}
@@ -66,7 +39,7 @@ const Recipes = ({ userId }) => {
                 borderRadius: 10,
                 height: 50,
                 marginBottom: 5,
-                elevation: 2
+                elevation: 2,
               }}
               onPress={() => {
                 getOneRecipe(item);
@@ -81,10 +54,10 @@ const Recipes = ({ userId }) => {
           )}
         />
       </View>
-      {modalVisible && (
+      {modalVisibleRecipes && (
         <AddRecipe
-          setModalVisible={setModalVisible}
-          modalVisible={modalVisible}
+          setModalVisibleRecipes={setModalVisibleRecipes}
+          modalVisibleRecipes={modalVisibleRecipes}
           userId={userId}
           aux={aux}
           setAux={setAux}

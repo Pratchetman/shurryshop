@@ -48,6 +48,7 @@ const OneRecipe = ({ modalVisible2, setModalVisible2, recipe }) => {
             <View
               style={{
                 width: "90%",
+                flex: 1
               }}
             >
               <Text style={styles.headerSubTitle}>Ingredientes</Text>
@@ -80,12 +81,6 @@ const OneRecipe = ({ modalVisible2, setModalVisible2, recipe }) => {
                 )}
               </ScrollView>
             </View>
-            <Pressable
-              style={[styles2.button, styles2.buttonClose]}
-              onPress={() => setModalVisible2(!modalVisible2)}
-            >
-              <Text style={styles2.textStyle}>Volver a recetas</Text>
-            </Pressable>
             <View
               style={{
                 backgroundColor: "green",
@@ -96,6 +91,13 @@ const OneRecipe = ({ modalVisible2, setModalVisible2, recipe }) => {
                 opacity: 0.7,
               }}
             />
+            <Pressable
+              style={[styles2.button, styles2.buttonClose]}
+              onPress={() => setModalVisible2(!modalVisible2)}
+            >
+              <Text style={styles2.textStyle}>Volver a recetas</Text>
+            </Pressable>
+           
           </View>
         </View>
       </Modal>

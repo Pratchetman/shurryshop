@@ -100,7 +100,7 @@ const OneCart = ({ list, aux, setAux, modalVisible2, setModalVisible2 }) => {
               </TouchableOpacity>
             ))
         ) : (
-          <Text style={{ fontSize: 18, color: "green" }}>
+          <Text style={{ fontSize: 18, color: "white", fontWeight: "bold" }}>
             Enhorabuena, compra completada!!
           </Text>
         )}

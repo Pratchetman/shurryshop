@@ -4,10 +4,12 @@ import {
   Text,
   SafeAreaView,
   TouchableOpacity,
+  ScrollView,
+  Image,
 } from "react-native";
-import { Stack, useSearchParams } from "expo-router";
+import { Stack, useRouter, useSearchParams } from "expo-router";
 import ScreenHeaderBtn from "../../components/common/header/ScreenHeaderBtn";
-import { images} from "../../constants";
+import { COLORS, images } from "../../constants";
 import styles from "./cartDetails.style";
 import useFetch from "../../hook/fetchData";
 import OneCart from "../../components/carts/OneCart";
@@ -20,10 +22,16 @@ const CartDetails = () => {
   const [modalShareVisible, setModalShareVisible] = useState(false);
   const { cartDetail, oneCart, completePurchase } = useFetch();
   const [aux, setAux] = useState(false);
+  const router = useRouter();
   const email = params.id.split("+")[1];
+
   useEffect(() => {
     cartDetail(params.id.split("+")[0]);
   }, [aux]);
+
+  if (oneCart) {
+    console.log(Object.keys(oneCart[4]));
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "orange", padding: 10 }}>
@@ -39,7 +47,22 @@ const CartDetails = () => {
               </Text>
             ) : null,
           headerRight: () => (
-            <ScreenHeaderBtn iconUrl={images.freezer} dimension="100%" />
+            <View>
+              <TouchableOpacity
+                onPress={() =>
+                  router.push(
+                    `/home2/${params.id.split("_")[0]}+${
+                      params.id.split("+")[1]
+                    }`
+                  )
+                }
+              >
+                <Image
+                  source={images.back}
+                  style={{ resizeMode: "contain", height: 25, width: 25}}
+                />
+              </TouchableOpacity>
+            </View>
           ),
           headerTitle: "",
         }}
@@ -55,7 +78,7 @@ const CartDetails = () => {
           userId={params.id.split("+")[0]}
         />
       )}
-          {modalShareVisible && (
+      {modalShareVisible && (
         <ShareCart
           list={oneCart}
           aux={aux}
@@ -65,27 +88,72 @@ const CartDetails = () => {
           email={email}
         />
       )}
-      {oneCart && (
-        <OneCart
-          aux={aux}
-          setAux={setAux}
-          list={oneCart}
-          setModalVisible2={setModalVisible}
-          modalVisible2={modalVisible}
-        />
-      )}
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: "gray",
+          borderWidth: 3,
+          borderColor: "white",
+          elevation: 2,
+          borderRadius: 16,
+          padding: 5,
+        }}
+      >
+        {oneCart && (
+          <OneCart
+            aux={aux}
+            setAux={setAux}
+            list={oneCart}
+            setModalVisible2={setModalVisible}
+            modalVisible2={modalVisible}
+          />
+        )}
+        {oneCart && Object.keys(oneCart[4]).length > 1 && (
+          <View
+            style={{
+              borderTopColor: "white",
+              borderTopWidth: 1,
+
+              marginVertical: 5,
+            }}
+          >
+            <Text
+              style={{
+                fontWeight: "bold",
+                color: COLORS.primary,
+                marginLeft: 8,
+                marginTop: 5,
+              }}
+            >
+              Recetas a recordar
+            </Text>
+            <ScrollView horizontal={true}>
+              {Object.keys(oneCart[4]).map((elem, index) => {
+                if (elem != "0") {
+                  return (
+                    <TouchableOpacity key={index} style={styles.applyBtnRecipe}>
+                      <Text style={styles.applyBtnTextRecipe}>{elem}</Text>
+                    </TouchableOpacity>
+                  );
+                }
+              })}
+            </ScrollView>
+          </View>
+        )}
+      </View>
+
       {oneCart && oneCart[0] === false && (
         <View
           style={{
-            borderTopColor: "green",
-            borderTopWidth: 1,
+            // borderTopColor: "green",
+            // borderTopWidth: 1,
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "flex-end",
           }}
         >
-           <TouchableOpacity
+          <TouchableOpacity
             style={styles.applyBtn}
             onPress={() => {
               setModalShareVisible(!modalShareVisible);

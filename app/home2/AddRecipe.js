@@ -23,7 +23,7 @@ const initialRecipe = {
   food: [],
 };
 
-const AddRecipe = ({ modalVisible, setModalVisible, userId, setAux, aux }) => {
+const AddRecipe = ({ modalVisibleRecipes, setModalVisibleRecipes, userId, setAux, aux }) => {
   const [recipe, setRecipe] = useState(initialRecipe);
   const [secondModal, setSecondModal] = useState(false);
   const [recipeFood, setRecipeFood] = useState([]);
@@ -37,7 +37,7 @@ const AddRecipe = ({ modalVisible, setModalVisible, userId, setAux, aux }) => {
   const newRecipe = () => {
     addRecipe(userId, recipe, recipeFood);
     setAux(!aux);
-    setModalVisible(!modalVisible);
+    setModalVisibleRecipes(!modalVisibleRecipes);
   };
 
   return (
@@ -46,9 +46,9 @@ const AddRecipe = ({ modalVisible, setModalVisible, userId, setAux, aux }) => {
         animationType="slide"
         transparent={true}
         propagateSwipe={true}
-        visible={modalVisible}
+        visible={modalVisibleRecipes}
         onRequestClose={() => {
-          setModalVisible(!modalVisible);
+          setModalVisibleRecipes(!modalVisibleRecipes);
         }}
       >
         <View style={styles2.centeredView}>
@@ -147,7 +147,7 @@ const AddRecipe = ({ modalVisible, setModalVisible, userId, setAux, aux }) => {
             >
               <Pressable
                 style={[styles2.button, styles2.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}
+                onPress={() => setModalVisibleRecipes(!modalVisibleRecipes)}
               >
                 <Text style={styles2.textStyle}>Cancelar</Text>
               </Pressable>

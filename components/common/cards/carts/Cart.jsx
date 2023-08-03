@@ -40,9 +40,9 @@ const Cart = ({ item, user }) => {
                 {user[0].toUpperCase()}
               </Text>
             </TouchableOpacity>
-            {oneCart[4] && (
+            {oneCart[5] && (
               <View style={{display: "flex", flexDirection: "row", gap: 5}}>
-                {oneCart[4].filter((elem)=>elem != user).map((elem, index) => { return (
+                {oneCart[5].filter((elem)=>elem != user).map((elem, index) => { return (
                   <TouchableOpacity key={index} style={styles.logoContainerSh}>
                     <Text style={{ color: "green", fontSize: 12 }}>
                       {elem[0].toUpperCase()}

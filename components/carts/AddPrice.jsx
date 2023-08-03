@@ -11,13 +11,13 @@ import {
 } from "react-native";
 import styles from "./oneCart.style";
 import useFetch from "../../hook/fetchData";
-import { isLoading } from "expo-font";
 
 const AddPrice = ({ modalVisible, setModalVisible, elemPrice, list }) => {
   const { addPriceToArticle, getPricesList, priceList, isLoading } = useFetch();
   const [price, setPrice] = useState("");
-  
+
   useEffect(() => {
+    // console.log("consolelogNuevo", list[1].split("_")[0]);
     getPricesList(list[1].split("_")[0], elemPrice.id);
   }, []);
 
@@ -39,7 +39,9 @@ const AddPrice = ({ modalVisible, setModalVisible, elemPrice, list }) => {
         <View style={styles2.centeredView}>
           <View style={styles2.modalView}>
             <Text style={styles.headerTitle}>Introducir precio</Text>
-            <Text style={styles.headerTitle}>{elemPrice.name.toUpperCase()}</Text>
+            <Text style={styles.headerTitle}>
+              {elemPrice.name.toUpperCase()}
+            </Text>
 
             <TextInput
               style={styles.searchInput}
@@ -80,7 +82,8 @@ const AddPrice = ({ modalVisible, setModalVisible, elemPrice, list }) => {
                   priceList?.map((elem, index) => {
                     return (
                       <Text key={index} style={styles2.textHistoryStyle2}>
-                        <Text style={{fontWeight: 600}}>{elem.price} €</Text> - {elem.date}
+                        <Text style={{ fontWeight: 600 }}>{elem.price} €</Text>{" "}
+                        - {elem.date}
                       </Text>
                     );
                   })

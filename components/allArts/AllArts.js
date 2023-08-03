@@ -3,32 +3,33 @@ import { Text, TouchableOpacity, View } from "react-native";
 import useFetch from "../../hook/fetchData";
 import styles from "./allArts.style";
 export const AllArts = ({ list, aux, setAux, search, setSearch, recipe }) => {
-  const { allArticles, fetchAllArticles, addArticlesToList, fetchAllArticlesWithRandom } = useFetch();
+  const {
+    allArticles,
+    fetchAllArticles,
+    addArticlesToList,
+    fetchAllArticlesWithRandom,
+  } = useFetch();
   let lista = Object.values(list[2]);
-  // console.log("lista", lista);
-  // console.log("list", list);
-  console.log("recipe", recipe);
-  console.log("allArticles", allArticles)
-  // console.log("search", search);
+
   useEffect(() => {
     let random = false;
-    if (recipe?.food){
-      for (let food of recipe.food){
-      if (food.type == "random"){
-        random = true;
-        console.log("random es true!!!")
+    if (recipe?.food) {
+      for (let food of recipe.food) {
+        if (food.type == "random") {
+          random = true;
+          
+        }
       }
-    }}
-    random ? 
-    fetchAllArticlesWithRandom(recipe): fetchAllArticles()
+    }
+    random ? fetchAllArticlesWithRandom(recipe) : fetchAllArticles();
   }, [aux]);
 
   return (
     <>
       <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 5 }}>
-        {(allArticles &&
-          recipe) &&
-           allArticles
+        {allArticles &&
+          recipe &&
+          allArticles
             .filter((elem) => {
               let res = false;
               if (search !== "" && !elem.name.includes(search)) {
@@ -66,7 +67,7 @@ export const AllArts = ({ list, aux, setAux, search, setSearch, recipe }) => {
                     key={index}
                     style={styles.logoContainer(article.type)}
                     onPress={() => {
-                      addArticlesToList(list, article);
+                      addArticlesToList(list, article, recipe);
                       setAux(!aux);
                     }}
                   >

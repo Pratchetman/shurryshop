@@ -4,6 +4,8 @@ import freezer from "../assets/images/freezer.png";
 import finished from "../assets/images/finished.png";
 import carrito from "../assets/images/carrito.png";
 import recipe from "../assets/images/recipe.png";
+import back from "../assets/icons/back.png";
+import left from "../assets/icons/left.png";
 
 export default {
   profile,
@@ -11,5 +13,7 @@ export default {
   freezer,
   finished,
   carrito,
-  recipe
+  recipe,
+  back,
+  left
 };
