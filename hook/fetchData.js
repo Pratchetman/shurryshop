@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, get, child, remove } from "firebase/database";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 import { useRouter } from "expo-router";
+import axios from "axios"; 
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAsnsbXe5ndPLVnBKLxH5yPO-C77ag4LH4",
@@ -29,6 +35,14 @@ const useFetch = () => {
 
   const router = useRouter();
 
+  const storeData = async (dataSt) => {
+    try {
+      await AsyncStorage.setItem("shurry-data", dataSt);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const userLogin = (dataUser) => {
     setLogged(false);
     setIsLoading(true);
@@ -42,6 +56,9 @@ const useFetch = () => {
         setLogged(true);
         setIsLoading(false);
         router.push(`/home2/${uid}+${userCredential.user.email}`);
+        const dataSt = uid.concat("+").concat(userCredential.user.email);
+        console.log(dataSt);
+        storeData(dataSt);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -49,6 +66,33 @@ const useFetch = () => {
         console.log(errorMessage);
         setIsLoading(false);
         setError("Error en los datos introducidos");
+      });
+  };
+
+  const addUser = (dataNewUser) => {
+    setIsLoading(true);
+    setLogged(false);
+    console.log("estoy añadiendo este usuario", dataNewUser);
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, dataNewUser.email, dataNewUser.pass)
+      .then((userCredential) => {
+        let dbs = getDatabase();
+        
+        setIsLoading(false);
+
+        const uid = userCredential.user.uid;
+        const user = userCredential.user;
+
+        set(ref(dbs, `users/${uid}`), { id: uid, mail: dataNewUser.email });
+        setLogged(true);
+        router.push(`/home2/${uid}+${userCredential.user.email}`);
+        const dataSt = uid.concat("+").concat(userCredential.user.email);
+        storeData(dataSt);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(error.message);
       });
   };
 
@@ -126,10 +170,9 @@ const useFetch = () => {
     let dbs = getDatabase();
     console.log("receta en el fetch", recipe.name);
     set(ref(dbs, `carts/${list[1]}/lista/${food.id}`), food);
-    if (recipe.name){
+    if (recipe.name) {
       set(ref(dbs, `carts/${list[1]}/recipes/${recipe.name}`), recipe.name);
     }
-    
   };
 
   const articleIn = (listId, article) => {
@@ -239,10 +282,13 @@ const useFetch = () => {
       } else {
         console.log("No data available");
       }
+     
       return false;
     } catch (error) {
       console.error(error);
+      
       return false;
+      
     }
   };
 
@@ -252,7 +298,8 @@ const useFetch = () => {
       id: list[1],
       lista: list[2],
       name: list[3],
-      shared: list[4],
+      recipes: list[4],
+      shared: list[5],
     };
 
     for (let newEmail of shareList) {
@@ -280,6 +327,7 @@ const useFetch = () => {
               set(ref(dbs, `users/${userId}/carts/${list[1]}`), {
                 id: list[1],
               });
+              
             } else {
               console.log(shareList[i], "NO existe en db");
             }
@@ -320,6 +368,15 @@ const useFetch = () => {
     });
   };
 
+  const sendMail = (mails) => {
+    const data = [mails];
+    axios
+    .post("http://192.168.1.130:3000/mailer", data)
+    .then((err)=>console.log("err",err))
+    .catch((error)=>console.log(error));
+
+  }
+
   return {
     isLoading,
     error,
@@ -345,6 +402,8 @@ const useFetch = () => {
     getRecipes,
     addRecipe,
     fetchAllArticlesWithRandom,
+    addUser,
+    sendMail
   };
 };
 

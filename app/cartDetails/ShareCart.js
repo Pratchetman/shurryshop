@@ -21,7 +21,7 @@ const ShareCart = ({
   const [shareMail, setShareMail] = useState("");
   const [shareList, setShareList] = useState([]);
   const [error, setError] = useState("");
-  const { toShareCart, checkUser } = useFetch();
+  const { toShareCart, checkUser, sendMail } = useFetch();
   console.log(email);
   const handleShareList = async () => {
     if (shareMail != email){
@@ -32,6 +32,7 @@ const ShareCart = ({
           setShareMail("");
         } else {
           setError("Usuario no existe");
+          sendMail(shareMail)
         }
       } catch (error) {
         console.log(error);

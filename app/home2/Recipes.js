@@ -21,8 +21,8 @@ const Recipes = ({ userId, modalVisibleRecipes, setModalVisibleRecipes }) => {
   };
 
   return (
-    <View style={{ flex: 1, paddingTop: 5 }}>
-      <View style={{ flex: 4 }}>
+    <View style={{ height: "95%", paddingBottom: 40, paddingTop: 5}}>
+      <View>
         <FlatList
           showsVerticalScrollIndicator={false}
           data={recipes}

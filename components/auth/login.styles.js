@@ -16,6 +16,12 @@ const styles = StyleSheet.create({
     fontFamily: FONT.bold,
     color: COLORS.lightWhite,
   },
+  headerTitleNew: {
+    marginTop: 70,
+    fontSize: 45,
+    fontFamily: FONT.bold,
+    color: "black",
+  },
   headerBtn: {
     fontSize: SIZES.medium,
     fontFamily: FONT.medium,
@@ -38,6 +44,18 @@ const styles = StyleSheet.create({
     fontSize: SIZES.large,
     color: COLORS.lightWhite,
     marginTop: 20,
+  },
+  userNameNew: {
+    fontFamily: FONT.regular,
+    fontSize: SIZES.large,
+    color: "black",
+    marginTop: 35,
+  },
+  userNameNewLogin: {
+    fontFamily: FONT.regular,
+    fontSize: SIZES.large,
+    color: COLORS.lightWhite,
+    marginTop: 35,
   },
   welcomeMessage: {
     fontFamily: FONT.bold,
@@ -86,7 +104,7 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: "center",
     alignItems: "center",
-    marginLeft: SIZES.medium,
+    // marginLeft: SIZES.medium,
     borderRadius: SIZES.medium,
     marginTop: 20,
   },
@@ -94,6 +112,32 @@ const styles = StyleSheet.create({
     fontSize: SIZES.medium,
     color: COLORS.secondary,
     fontFamily: FONT.bold,
+  },
+  applyBtnNew: {
+    width: 150,
+    backgroundColor: "orange",
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    // marginLeft: SIZES.medium,
+    borderRadius: SIZES.medium,
+    marginTop: 20,
+  },
+  applyBtnTextNew: {
+    fontSize: SIZES.medium,
+    color: COLORS.secondary,
+    fontFamily: FONT.bold,
+  },
+  applyBtnNew2: {
+    width: 150,
+    backgroundColor: "rgb(88,192,216)",
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    // marginLeft: SIZES.medium,
+    borderRadius: SIZES.medium,
+    marginTop: 20,
+    borderWidth: 2
   },
   
 

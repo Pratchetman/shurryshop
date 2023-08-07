@@ -52,8 +52,11 @@ const Cart = ({ item, user }) => {
               </View>
             )}
             <Text style={styles.companyName} numberOfLines={1}>
-              {oneCart[3]} -{" "}
-              {new Date(
+              {oneCart[3]}
+              
+            </Text>
+            <Text style={styles.companyName}>
+            {new Date(
                 parseInt(oneCart[1].split("_")[1])
               ).toLocaleDateString()}
             </Text>

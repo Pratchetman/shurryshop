@@ -8,6 +8,7 @@ import {
   Image,
 } from "react-native";
 import { Stack, useRouter, useSearchParams } from "expo-router";
+import { AsyncStorage } from '@react-native-async-storage/async-storage';
 import ScreenHeaderBtn from "../../components/common/header/ScreenHeaderBtn";
 import { COLORS, images } from "../../constants";
 import styles from "./cartDetails.style";
@@ -25,8 +26,10 @@ const CartDetails = () => {
   const router = useRouter();
   const email = params.id.split("+")[1];
 
+
   useEffect(() => {
     cartDetail(params.id.split("+")[0]);
+  
   }, [aux]);
 
   if (oneCart) {

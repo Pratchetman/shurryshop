@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   FlatList,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import { Stack, useRouter, useSearchParams } from "expo-router";
 import ScreenHeaderBtn from "../../components/common/header/ScreenHeaderBtn";
@@ -57,13 +58,36 @@ const Home2 = () => {
         }}
       />
       {view == "listas" && (
-        <View style={{ flex: 1, paddingTop: 5 }}>
-          {cartList && (
-            <View style={{ flex: 4 }}>
+        <View style={{ height: "97%", paddingTop: 5, paddingBottom: 40 }}>
+          {cartList ? (
+            <View style={{ flex: 1 }}>
               <FlatList
                 showsVerticalScrollIndicator={false}
                 data={cartList}
                 renderItem={({ item }) => <Cart item={item} user={user} />}
+              />
+            </View>
+          ) : (
+            <View
+              style={{
+                flex: 1,
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              {/* <Text style={{ alignSelf: "center", fontSize: 36 }}>
+                ¿Aún no tienes listas?
+              </Text> */}
+              <Image
+                source={images.noCarts}
+                style={{
+                  width: "100%",
+                  height: "70%",
+                  resizeMode: "contain",
+                  alignSelf: "center",
+                }}
               />
             </View>
           )}

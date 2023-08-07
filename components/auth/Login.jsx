@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import { useRouter } from "expo-router";
 import { icons, SIZES, COLORS, images } from "../../constants";
+import { AsyncStorage } from '@react-native-async-storage/async-storage';
 
 import styles from "./login.styles";
 
-const Login = ({ login, setLogin, handleClick }) => {
+const Login = ({ login, setLogin, handleClick, setNewUser, newUser }) => {
   return (
     <View
       style={{
@@ -44,6 +45,10 @@ const Login = ({ login, setLogin, handleClick }) => {
         <Text style={styles.applyBtnText} >
           Acceder
         </Text>
+      </TouchableOpacity>
+      <Text style={styles.userNameNewLogin}>¿No tienes cuenta?</Text>
+      <TouchableOpacity style={styles.applyBtnNew} onPress={()=>setNewUser(!newUser)}>
+        <Text style={styles.applyBtnTextNew}>Nuevo Usuario</Text>
       </TouchableOpacity>
     </View>
   );

@@ -5,22 +5,20 @@ import { COLORS, FONT, SHADOWS, SIZES } from "../../../../constants";
 const styles = StyleSheet.create({
   container: (finished) => ({
     width: "98%",
-    height: 135,
+    maxHeight: 150,
     margin: 4,
     borderWidth: finished === true ? 0 : 3,
     borderColor: finished === true ? "green" : "white",
     backgroundColor: "green",
     borderRadius: SIZES.medium,
     justifyContent: "space-between",
-    // ...SHADOWS.medium,
-    // shadowColor: COLORS.white,
     overflow: "hidden",
     flexDirection: "row",
     paddingVertical: 15,
     paddingHorizontal: 10,
-    elevation: 2
+    elevation: 2,
   }),
-  logoContainer:{
+  logoContainer: {
     width: 50,
     height: 50,
     backgroundColor: COLORS.white,
@@ -28,12 +26,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  logoContainerSh:{
+  logoContainerSh: {
     width: 20,
     height: 20,
     backgroundColor: COLORS.white,
     borderRadius: 8,
-    marginTop: 10,
+    marginTop: 7,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -45,13 +43,13 @@ const styles = StyleSheet.create({
     fontSize: SIZES.medium,
     fontFamily: FONT.regular,
     color: "white",
-    marginTop: SIZES.small / 1.5,
+    marginTop: 3,
     marginLeft: 3,
   },
   infoContainer: {
     marginTop: SIZES.large,
   },
-  jobName:{
+  jobName: {
     fontSize: SIZES.large,
     fontFamily: FONT.medium,
     color: COLORS.primary,
@@ -62,7 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
   },
-  publisher:{
+  publisher: {
     fontSize: SIZES.medium - 2,
     fontFamily: FONT.regular,
     color: COLORS.primary,
