@@ -53,23 +53,6 @@ const AddPrice = ({ modalVisible, setModalVisible, elemPrice, list }) => {
               placeholder="Introducir precio"
               maxLength={6}
             />
-            <View style={{ flexDirection: "row", gap: 20 }}>
-              <Pressable
-                style={[styles2.button, styles2.buttonClose]}
-                onPress={handleNewPrice}
-              >
-                <Text style={styles2.textStyle}>Guardar</Text>
-              </Pressable>
-              <Pressable
-                style={[styles2.button, styles2.buttonClose]}
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                  setPrice("");
-                }}
-              >
-                <Text style={styles2.textStyle}>Cancelar</Text>
-              </Pressable>
-            </View>
 
             {isLoading ? (
               <ActivityIndicator style={{ marginTop: 10 }} />
@@ -94,6 +77,23 @@ const AddPrice = ({ modalVisible, setModalVisible, elemPrice, list }) => {
                 )}
               </View>
             )}
+            <View style={{ flexDirection: "row", gap: 20 }}>
+              <Pressable
+                style={[styles2.button, styles2.buttonClose]}
+                onPress={handleNewPrice}
+              >
+                <Text style={styles2.textStyle}>Guardar</Text>
+              </Pressable>
+              <Pressable
+                style={[styles2.button, styles2.buttonClose]}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                  setPrice("");
+                }}
+              >
+                <Text style={styles2.textStyle}>Cancelar</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
       </Modal>
@@ -128,7 +128,8 @@ const styles2 = StyleSheet.create({
   },
   button: {
     borderRadius: 20,
-    padding: 10,
+    padding: 15,
+    paddingHorizontal: 20,
     elevation: 2,
   },
   buttonOpen: {
@@ -146,13 +147,13 @@ const styles2 = StyleSheet.create({
   textHistoryStyle: {
     color: "black",
     fontWeight: 200,
-    marginTop: 10,
+
     alignSelf: "center",
   },
   textHistoryStyle2: {
     color: "black",
     fontWeight: 200,
-    marginTop: 10,
+    marginBottom: 5,
     alignSelf: "center",
   },
   modalText: {

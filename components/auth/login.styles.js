@@ -16,6 +16,11 @@ const styles = StyleSheet.create({
     fontFamily: FONT.bold,
     color: COLORS.lightWhite,
   },
+  headerTitleLogout: {
+    fontSize: 25,
+    fontFamily: FONT.bold,
+    color: COLORS.secondary,
+  },
   headerTitleNew: {
     marginTop: 70,
     fontSize: 45,

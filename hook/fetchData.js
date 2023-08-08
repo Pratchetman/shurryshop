@@ -43,6 +43,14 @@ const useFetch = () => {
     }
   };
 
+  const removeData = async (dataSt) => {
+    try {
+      await AsyncStorage.removeItem("shurry-data");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const userLogin = (dataUser) => {
     setLogged(false);
     setIsLoading(true);
@@ -67,6 +75,13 @@ const useFetch = () => {
         setIsLoading(false);
         setError("Error en los datos introducidos");
       });
+  };
+
+  const userLogOut = () => {
+    setLogged(false);
+    removeData();
+    router.push("/");
+ 
   };
 
   const addUser = (dataNewUser) => {
@@ -371,8 +386,8 @@ const useFetch = () => {
   const sendMail = (mails) => {
     const data = [mails];
     axios
-    .post("http://192.168.1.130:3000/mailer", data)
-    .then((err)=>console.log("err",err))
+    .post("https://shurryback-0b6g-dev.fl0.io/mailer", data)
+    .then((res)=>console.log(res.data.message))
     .catch((error)=>console.log(error));
 
   }
@@ -403,7 +418,8 @@ const useFetch = () => {
     addRecipe,
     fetchAllArticlesWithRandom,
     addUser,
-    sendMail
+    sendMail,
+    userLogOut
   };
 };
 

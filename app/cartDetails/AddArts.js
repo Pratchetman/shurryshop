@@ -159,6 +159,7 @@ const styles2 = StyleSheet.create({
     backgroundColor: "orange",
     borderRadius: 20,
     padding: 20,
+    paddingHorizontal: 15,
     paddingBottom: 12,
     alignItems: "center",
     shadowColor: "black",
@@ -176,7 +177,8 @@ const styles2 = StyleSheet.create({
   },
   button: {
     borderRadius: 20,
-    padding: 10,
+    padding: 15,
+    paddingHorizontal: 20,
     elevation: 2,
   },
   buttonOpen: {

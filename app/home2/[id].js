@@ -17,13 +17,15 @@ import useFetch from "../../hook/fetchData";
 import Cart from "../../components/common/cards/carts/Cart";
 import AddCart from "../../components/carts/AddCart";
 import Recipes from "./Recipes";
+import Logout from "../../components/auth/Logout";
 
 const Home2 = () => {
   const params = useSearchParams();
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisibleRecipes, setModalVisibleRecipes] = useState(false);
+  const [modalLogout, setModalLogout] = useState(false);
   const [view, setView] = useState("listas");
-  const { isLoading, userLogin, shoppingCarts, cartList } = useFetch();
+  const { shoppingCarts, cartList } = useFetch();
   const [user, setUser] = useState(params.id.split("+")[1]);
   const [userId, setUserId] = useState(params.id.split("+")[0]);
 
@@ -40,7 +42,7 @@ const Home2 = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "orange", padding: 20 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "orange", paddingHorizontal: 20, paddingBottom: 20 }}>
       <Stack.Screen
         options={{
           headerStyle: { backgroundColor: "orange" },
@@ -52,7 +54,12 @@ const Home2 = () => {
             </Text>
           ),
           headerRight: () => (
-            <ScreenHeaderBtn iconUrl={images.freezer} dimension="100%" />
+            <ScreenHeaderBtn
+              iconUrl={images.freezer}
+              dimension="100%"
+              modalLogout={modalLogout}
+              setModalLogout={setModalLogout}
+            />
           ),
           headerTitle: "",
         }}
@@ -160,6 +167,7 @@ const Home2 = () => {
           user={user}
         />
       )}
+      {modalLogout && <Logout modalLogout={modalLogout} setModalLogout={setModalLogout}/>}
     </SafeAreaView>
   );
 };

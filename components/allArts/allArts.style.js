@@ -34,10 +34,10 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   logoContainer: (type) => ({
-    width: 80,
-    height: 80,
+    width: 82,
+    height: 82,
     padding: 5,
-    borderWidth: 1,
+    borderWidth: 3,
     borderColor: "white",
     backgroundColor:
       type === "fruits"

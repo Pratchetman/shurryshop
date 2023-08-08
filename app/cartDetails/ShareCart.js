@@ -60,7 +60,7 @@ const ShareCart = ({
               ¿Con quién quieres compartir "{list[3]}"?
             </Text>
             <TextInput
-              style={styles.searchInput}
+              style={styles.searchInputEmail}
               placeholder="Introduce email de usuario"
               value={shareMail}
               onChangeText={(text) => {
@@ -161,7 +161,8 @@ const styles2 = StyleSheet.create({
   },
   button: {
     borderRadius: 20,
-    padding: 14,
+    padding: 15,
+    paddingHorizontal: 20,
     elevation: 2,
   },
   buttonOpen: {

@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     width: 90,
     height: 90,
     padding: 5,
-    borderWidth: 1,
+    borderWidth: 3,
     borderColor: "white",
     backgroundColor:
       elem?.type === "fruits"

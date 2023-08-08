@@ -26,7 +26,7 @@ export const AllArts = ({ list, aux, setAux, search, setSearch, recipe }) => {
 
   return (
     <>
-      <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 5 }}>
+      <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 5, justifyContent: "center" }}>
         {allArticles &&
           recipe &&
           allArticles

@@ -21,38 +21,51 @@ const Recipes = ({ userId, modalVisibleRecipes, setModalVisibleRecipes }) => {
   };
 
   return (
-    <View style={{ height: "95%", paddingBottom: 40, paddingTop: 5}}>
+    <View style={{ height: "95%", paddingBottom: 40, paddingTop: 5 }}>
       <View>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          data={recipes}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={{
-                backgroundColor: "green",
-                padding: 7,
-                paddingHorizontal: 10,
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                borderRadius: 10,
-                height: 50,
-                marginBottom: 5,
-                elevation: 2,
-              }}
-              onPress={() => {
-                getOneRecipe(item);
-              }}
-            >
-              <Text style={{ color: "white" }}>{item.name}</Text>
-              <Image
-                style={{ height: "100%", width: 20 }}
-                source={images.recipe}
-              />
-            </TouchableOpacity>
-          )}
-        />
+        {recipes.length > 0 ? (
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={recipes}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "green",
+                  padding: 7,
+                  paddingHorizontal: 10,
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  borderRadius: 10,
+                  height: 50,
+                  marginBottom: 5,
+                  elevation: 2,
+                }}
+                onPress={() => {
+                  getOneRecipe(item);
+                }}
+              >
+                <Text style={{ color: "white" }}>{item.name}</Text>
+                <Image
+                  style={{ height: "100%", width: 20 }}
+                  source={images.recipe}
+                />
+              </TouchableOpacity>
+            )}
+          />
+        ) : (
+          <View
+            style={{
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text>Aún no has subido recetas</Text>
+          </View>
+        )}
       </View>
       {modalVisibleRecipes && (
         <AddRecipe

@@ -39,6 +39,15 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     marginVertical: 10,
   },
+  searchInputEmail: {
+    fontFamily: FONT.regular,
+    width: "95%",
+    height: 40,
+    paddingHorizontal: SIZES.medium,
+    backgroundColor: COLORS.lightWhite,
+    borderRadius: 16,
+    marginVertical: 10,
+  },
   searchInputModal: {
     fontFamily: FONT.regular,
     width: "40%",

@@ -7,6 +7,7 @@ import recipe from "../assets/images/recipe.png";
 import noCarts from "../assets/images/noCarts.png";
 import back from "../assets/icons/back.png";
 import left from "../assets/icons/left.png";
+import goldCoins from "../assets/images/goldCoins.png";
 
 export default {
   profile,
@@ -17,5 +18,6 @@ export default {
   recipe,
   back,
   left,
-  noCarts
+  noCarts,
+  goldCoins
 };

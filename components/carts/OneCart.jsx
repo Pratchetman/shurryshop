@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   FlatList,
+  Image,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -9,6 +10,7 @@ import {
 import styles from "./oneCart.style";
 import useFetch from "../../hook/fetchData";
 import AddPrice from "./AddPrice";
+import { images } from "../../constants";
 
 const OneCart = ({ list, aux, setAux, modalVisible2, setModalVisible2 }) => {
   const { fetchAllArticles, cartDetail, articleIn, oneCart } = useFetch();
@@ -65,7 +67,7 @@ const OneCart = ({ list, aux, setAux, modalVisible2, setModalVisible2 }) => {
                 borderRadius: 100 / 2,
                 justifyContent: "center",
                 alignItems: "center",
-                // marginBottom: 5,
+                
               }}
             >
               <Text style={{ fontSize: 30, color: "black" }}>+</Text>
@@ -133,7 +135,8 @@ const OneCart = ({ list, aux, setAux, modalVisible2, setModalVisible2 }) => {
           flexWrap: "wrap",
           gap: 5,
           justifyContent: "center",
-          marginBottom: 10,
+          margin: "auto",
+          
         }}
       >
         {oneCart &&
@@ -148,12 +151,16 @@ const OneCart = ({ list, aux, setAux, modalVisible2, setModalVisible2 }) => {
                 }}
                 onLongPress={() => setPrice(elem)}
               >
-                <Text style={{ color: "white", textAlign: "center" }}>
+                <Text style={{ color: "white", textAlign: "center", fontSize: 14 }}>
                   {" "}
                   {elem.name}
                 </Text>
                 {elem.price && (
-                  <Text style={{ color: "white" }}>{elem.price} €</Text>
+                  <View style={{display: "flex", flexDirection: "row", alignItems: "center", marginTop: 10}}>
+                    <Image source={images.goldCoins} style={{height: 20, width: 17}} resizeMode="contain" />
+                    <Text style={{ color: "white", fontSize: 15 }}>{elem.price} €</Text>
+                  </View>
+                  
                 )}
               </TouchableOpacity>
             ))}
