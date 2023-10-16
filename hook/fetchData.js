@@ -11,7 +11,7 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAsnsbXe5ndPLVnBKLxH5yPO-C77ag4LH4",
+  apiKey: "",
   authDomain: "shurryshop.firebaseapp.com",
   databaseURL:
     "https://shurryshop-default-rtdb.europe-west1.firebasedatabase.app",
